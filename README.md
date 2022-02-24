@@ -1,4 +1,4 @@
-**NEXTJS_SimpleSNS**
+# NEXTJS_SimpleSNS
 
 ### 기술 스택
 
