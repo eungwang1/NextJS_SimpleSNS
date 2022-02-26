@@ -12,6 +12,7 @@ const configureStore = () => {
       ? compose(applyMiddleware(...middlewares))
       : composeWithDevTools(applyMiddleware(...middlewares));
   const store = createStore(reducer, enhancer);
+  return store;
 };
 
 const wrapper = createWrapper(configureStore, {

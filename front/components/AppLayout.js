@@ -1,11 +1,10 @@
-import App from "next/app";
+import React from "react";
 import propTypes from "prop-types";
 import Link from "next/link";
 import { Input, Menu, Row, Col } from "antd";
-import { useState } from "react";
 import styled from "styled-components";
-import UserProfile from "../components/UserProfile";
-import LoginForm from "../components/LoginForm";
+import UserProfile from "./UserProfile";
+import LoginForm from "./LoginForm";
 import { useSelector } from "react-redux";
 
 const AppLayout = ({ children }) => {
