@@ -40,11 +40,7 @@ const AppLayout = ({ children }) => {
             {children}
           </Col>
           <Col xs={24} md={6}>
-            <a
-              href="https://cafe.naver.com/gathertown"
-              target="_blank"
-              rel="noreferrer noopener"
-            >
+            <a href="https://cafe.naver.com/gathertown" target="_blank" rel="noreferrer noopener">
               Made by Eungwang
             </a>
           </Col>
