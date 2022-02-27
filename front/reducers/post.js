@@ -9,13 +9,13 @@ export const initialState = {
       content: "첫번쨰 게시글",
       Images: [
         {
-          src: "https://imgur.com/a/j4kH4ao",
+          src: "https://i.imgur.com/KbN1f6o.png",
         },
         {
-          src: "https://imgur.com/a/j4kH4ao",
+          src: "https://i.imgur.com/KbN1f6o.png",
         },
         {
-          src: "https://imgur.com/a/j4kH4ao",
+          src: "https://i.imgur.com/KbN1f6o.png",
         },
       ],
       Comments: [
