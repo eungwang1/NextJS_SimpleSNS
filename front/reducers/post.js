@@ -12,7 +12,7 @@ export const initialState = {
           src: "https://i.imgur.com/KbN1f6o.png",
         },
         {
-          src: "https://i.imgur.com/KbN1f6o.png",
+          src: "https://i.imgur.com/0hqdhpd.jpeg",
         },
         {
           src: "https://i.imgur.com/KbN1f6o.png",
