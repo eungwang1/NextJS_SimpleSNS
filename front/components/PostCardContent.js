@@ -5,11 +5,11 @@ import Link from "next/link";
 const PostCardContent = ({ postData }) => (
   // 첫 번째 게시글 #해시태그 #익스프레스
   <div>
-    {postData.split(/(#[^\s#]+)/g).map((v) => {
+    {postData.split(/(#[^\s#]+)/g).map((v, i) => {
       // 일치하는지
       if (v.match(/(#[^\s#]+)/)) {
         return (
-          <Link href={`/hashtag/${v.slice(1)}`}>
+          <Link href={`/hashtag/${v.slice(1)}`} key={i}>
             <a>{v}</a>
           </Link>
         );
