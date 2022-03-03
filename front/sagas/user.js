@@ -1,4 +1,4 @@
-import { all, fork, call, put, delay, takeLatest } from "redux-saga/effects";
+import { all, fork, call, put, delay, takeLatest } from 'redux-saga/effects';
 import {
   LOG_IN_FAILURE,
   LOG_IN_REQUEST,
@@ -9,10 +9,10 @@ import {
   SIGN_UP_REQUEST,
   SIGN_UP_SUCCESS,
   SIGN_UP_FAILURE,
-} from "../reducers/user";
+} from '../reducers/user';
 
 function logInAPI(data) {
-  return axios.post("/api/login", data);
+  return axios.post('/api/login', data);
 }
 
 // call 동기  :  결과값 받을때 까지 기다렷다가 실행된다  - await 이랑 비슷
@@ -36,7 +36,7 @@ function* logIn(action) {
 }
 
 function logOutAPI() {
-  return axios.post("/api/logout");
+  return axios.post('/api/logout');
 }
 
 function* logOut() {
@@ -55,7 +55,7 @@ function* logOut() {
 }
 
 function signUpAPI() {
-  return axios.post("/api/signUp");
+  return axios.post('/api/signUp');
 }
 
 function* signUp() {
@@ -75,7 +75,8 @@ function* signUp() {
 
 // eventListener 같은 역할
 // takeEvery - while(true) 와 같은 역할
-// takeLatest - 동시에 로딩중인 것 들 중에 마지막 액션실행 - 실수로 두번 클릭되는거 방지 - 단, 백엔드 요청을 취소할 수는 없음... 응답을 취소하는 형태.. 주의 ..
+// takeLatest - 동시에 로딩중인 것 들 중에 마지막 액션실행 - 실수로 두번 클릭되는거 방지 - 단, 백엔드 요청을 취소할 수는 없음...
+// 응답을 취소하는 형태.. 주의 ..
 // 서버쪽에서 중복요청 검사하는편이 좋다.
 // 디도스 공격처럼 될거 같으면 throttle 쓰자.
 // throttle(... , 1000); 몇초후에 실행.
@@ -89,7 +90,7 @@ function* watchLogOut() {
 }
 
 function* watchSignUp() {
-  yield takeLatest(LOG_OUT_REQUEST, signUp);
+  yield takeLatest(SIGN_UP_REQUEST, signUp);
 }
 
 export default function* userSaga() {

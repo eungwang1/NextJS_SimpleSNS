@@ -1,11 +1,11 @@
-import React from "react";
-import propTypes from "prop-types";
-import Link from "next/link";
-import { Input, Menu, Row, Col } from "antd";
-import styled from "styled-components";
-import UserProfile from "./UserProfile";
-import LoginForm from "./LoginForm";
-import { useSelector } from "react-redux";
+import React from 'react';
+import { useSelector } from 'react-redux';
+import propTypes from 'prop-types';
+import Link from 'next/link';
+import { Input, Menu, Row, Col } from 'antd';
+import styled from 'styled-components';
+import UserProfile from './UserProfile';
+import LoginForm from './LoginForm';
 
 const AppLayout = ({ children }) => {
   const { me } = useSelector((state) => state.user);
