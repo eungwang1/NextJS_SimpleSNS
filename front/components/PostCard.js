@@ -2,13 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Proptypes from 'prop-types';
 import { Card, Popover, Button, Avatar, List, Comment } from 'antd';
-import {
-  EllipsisOutlined,
-  MessageOutlined,
-  HeartOutlined,
-  RetweetOutlined,
-  HeartTwoTone,
-} from '@ant-design/icons';
+import { EllipsisOutlined, MessageOutlined, HeartOutlined, RetweetOutlined, HeartTwoTone } from '@ant-design/icons';
 import PostImages from './PostImages';
 import CommentForm from './CommentForm';
 import PostCardContent from './PostCardContent';
@@ -43,11 +37,7 @@ const PostCard = ({ post }) => {
         actions={[
           <RetweetOutlined key="retweet" />,
           liked ? (
-            <HeartTwoTone
-              twoToneColor="#eb3f96"
-              key="heart"
-              onClick={onToggleLike}
-            />
+            <HeartTwoTone twoToneColor="#eb3f96" key="heart" onClick={onToggleLike} />
           ) : (
             <HeartOutlined key="heart" onClick={onToggleLike} />
           ),
@@ -59,11 +49,7 @@ const PostCard = ({ post }) => {
                 {id && post.User.id === id ? (
                   <>
                     <Button>수정</Button>
-                    <Button
-                      type="danger"
-                      loading={removePostLoading}
-                      onClick={onRemovePost}
-                    >
+                    <Button type="danger" loading={removePostLoading} onClick={onRemovePost}>
                       삭제
                     </Button>
                   </>
