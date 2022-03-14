@@ -1,4 +1,4 @@
-import { all, fork, put, delay, takeLatest } from 'redux-saga/effects';
+import { all, fork, put, delay, takeLatest, throttle } from 'redux-saga/effects';
 import shortId from 'shortid';
 import {
   ADD_COMMENT_FAILURE,
@@ -10,8 +10,33 @@ import {
   REMOVE_POST_REQUEST,
   REMOVE_POST_SUCCESS,
   REMOVE_POST_FAILURE,
+  LOAD_POSTS_REQUEST,
+  LOAD_POSTS_SUCCESS,
+  LOAD_POSTS_FAILURE,
+  generateDummyPost,
 } from '../reducers/post';
 import { ADD_POST_TO_ME, REMOVE_POST_OF_ME } from '../reducers/user';
+
+function loadPostsAPI(data) {
+  return axios.get('/api/posts', data);
+}
+
+function* loadPosts(action) {
+  try {
+    // const result = yield call(addPostAPI, action.data);
+    yield delay(1000);
+    const id = shortId.generate();
+    yield put({
+      type: LOAD_POSTS_SUCCESS,
+      data: generateDummyPost(10),
+    });
+  } catch (err) {
+    yield put({
+      type: LOAD_POSTS_FAILURE,
+      data: err.response.data,
+    });
+  }
+}
 
 function addPostAPI(data) {
   return axios.post('/api/post', data);
@@ -85,6 +110,11 @@ function* addComment(action) {
   }
 }
 
+// throttle 3초동안은 다른 리퀘스트들을 다 무시한다.
+function* watchLoadPosts() {
+  yield throttle(3000, LOAD_POSTS_REQUEST, loadPosts);
+}
+
 function* watchAddPost() {
   yield takeLatest(ADD_POST_REQUEST, addPost);
 }
@@ -98,5 +128,10 @@ function* watchRemovePost() {
 }
 
 export default function* postSaga() {
-  yield all([fork(watchAddPost), fork(watchAddComment), fork(watchRemovePost)]);
+  yield all([
+    fork(watchAddPost),
+    fork(watchLoadPosts),
+    fork(watchAddComment),
+    fork(watchRemovePost),
+  ]);
 }

@@ -1,4 +1,4 @@
-import { all, fork, call, put, delay, takeLatest } from 'redux-saga/effects';
+import { all, fork, call, put, delay, takeLatest } from "redux-saga/effects";
 import {
   LOG_IN_FAILURE,
   LOG_IN_REQUEST,
@@ -9,10 +9,16 @@ import {
   SIGN_UP_REQUEST,
   SIGN_UP_SUCCESS,
   SIGN_UP_FAILURE,
-} from '../reducers/user';
+  FOLLOW_REQUEST,
+  FOLLOW_SUCCESS,
+  FOLLOW_FAILURE,
+  UNFOLLOW_REQUEST,
+  UNFOLLOW_SUCCESS,
+  UNFOLLOW_FAILURE,
+} from "../reducers/user";
 
 function logInAPI(data) {
-  return axios.post('/api/login', data);
+  return axios.post("/api/login", data);
 }
 
 // call 동기  :  결과값 받을때 까지 기다렷다가 실행된다  - await 이랑 비슷
@@ -36,7 +42,7 @@ function* logIn(action) {
 }
 
 function logOutAPI() {
-  return axios.post('/api/logout');
+  return axios.post("/api/logout");
 }
 
 function* logOut() {
@@ -54,8 +60,48 @@ function* logOut() {
   }
 }
 
+function followAPI() {
+  return axios.post("/api/Follow");
+}
+
+function* follow(action) {
+  try {
+    // const result = yield call(followAPI);
+    yield delay(1000);
+    yield put({
+      type: FOLLOW_SUCCESS,
+      data: action.data,
+    });
+  } catch (err) {
+    yield put({
+      type: FOLLOW_FAILURE,
+      err: err.response.data,
+    });
+  }
+}
+
+function unfollowAPI() {
+  return axios.post("/api/unfollow");
+}
+
+function* unfollow(action) {
+  try {
+    // const result = yield call(unfollowAPI);
+    yield delay(1000);
+    yield put({
+      type: UNFOLLOW_SUCCESS,
+      data: action.data,
+    });
+  } catch (err) {
+    yield put({
+      type: UNFOLLOW_FAILURE,
+      err: err.response.data,
+    });
+  }
+}
+
 function signUpAPI() {
-  return axios.post('/api/signUp');
+  return axios.post("/api/signUp");
 }
 
 function* signUp() {
@@ -81,6 +127,14 @@ function* signUp() {
 // 디도스 공격처럼 될거 같으면 throttle 쓰자.
 // throttle(... , 1000); 몇초후에 실행.
 
+function* watchFollow() {
+  yield takeLatest(FOLLOW_REQUEST, follow);
+}
+
+function* watchUnfollow() {
+  yield takeLatest(UNFOLLOW_REQUEST, unfollow);
+}
+
 function* watchLogIn() {
   yield takeLatest(LOG_IN_REQUEST, logIn);
 }
@@ -94,5 +148,5 @@ function* watchSignUp() {
 }
 
 export default function* userSaga() {
-  yield all([fork(watchLogIn), fork(watchLogOut), fork(watchSignUp)]);
+  yield all([fork(watchLogIn), fork(watchLogOut), fork(watchSignUp), fork(watchFollow), fork(watchUnfollow)]);
 }

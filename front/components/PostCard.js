@@ -1,12 +1,19 @@
-import React, { useCallback, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import Proptypes from 'prop-types';
-import { Card, Popover, Button, Avatar, List, Comment } from 'antd';
-import { EllipsisOutlined, MessageOutlined, HeartOutlined, RetweetOutlined, HeartTwoTone } from '@ant-design/icons';
-import PostImages from './PostImages';
-import CommentForm from './CommentForm';
-import PostCardContent from './PostCardContent';
-import { REMOVE_POST_REQUEST } from '../reducers/post';
+import React, { useCallback, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Proptypes from "prop-types";
+import { Card, Popover, Button, Avatar, List, Comment } from "antd";
+import {
+  EllipsisOutlined,
+  MessageOutlined,
+  HeartOutlined,
+  RetweetOutlined,
+  HeartTwoTone,
+} from "@ant-design/icons";
+import PostImages from "./PostImages";
+import CommentForm from "./CommentForm";
+import PostCardContent from "./PostCardContent";
+import { REMOVE_POST_REQUEST } from "../reducers/post";
+import FollowButton from "./FollowButton";
 
 const PostCard = ({ post }) => {
   const dispatch = useDispatch();
@@ -31,7 +38,7 @@ const PostCard = ({ post }) => {
   }, []);
 
   return (
-    <div style={{ marginBottom: '20px' }}>
+    <div style={{ marginBottom: "20px" }}>
       <Card
         cover={post.Images[0] && <PostImages images={post.Images} />}
         actions={[
@@ -62,6 +69,7 @@ const PostCard = ({ post }) => {
             <EllipsisOutlined />
           </Popover>,
         ]}
+        extra={id && <FollowButton post={post}></FollowButton>}
       >
         <Card.Meta
           avatar={<Avatar>{post.User.Images}</Avatar>}
@@ -94,7 +102,7 @@ const PostCard = ({ post }) => {
 
 PostCard.propTypes = {
   post: Proptypes.shape({
-    id: Proptypes.number,
+    id: Proptypes.string,
     User: Proptypes.object,
     content: Proptypes.string,
     createdAt: Proptypes.object,
