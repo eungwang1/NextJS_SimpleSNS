@@ -4,7 +4,7 @@
 
 <hr/>
 
-- NEXTJS, REDUX, Styled Components, Ant Design, AWS, EXPRESS, NODE, MySQL
+- NEXTJS, REDUX, Styled Components, Ant Design, 
 
 <br>
 
