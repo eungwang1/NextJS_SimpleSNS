@@ -4,7 +4,7 @@
 
 <hr/>
 
-- NEXTJS, REDUX, Styled Components, Ant Design, 
+- NEXTJS, REDUX-SAGA, Styled Components, Ant Design, 
 
 <br>
 
